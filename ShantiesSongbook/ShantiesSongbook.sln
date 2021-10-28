@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShantiesSongbook", "ShantiesSongbook\ShantiesSongbook.csproj", "{A403DE1E-AA77-4E01-8832-B4446940A267}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShantiesSongbookTests", "ShantiesSongbookTests\ShantiesSongbookTests.csproj", "{E8205554-73AA-448F-953D-C5E2B72C94F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A403DE1E-AA77-4E01-8832-B4446940A267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A403DE1E-AA77-4E01-8832-B4446940A267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A403DE1E-AA77-4E01-8832-B4446940A267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A403DE1E-AA77-4E01-8832-B4446940A267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8205554-73AA-448F-953D-C5E2B72C94F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8205554-73AA-448F-953D-C5E2B72C94F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8205554-73AA-448F-953D-C5E2B72C94F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8205554-73AA-448F-953D-C5E2B72C94F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C13FF8F3-2757-4D91-9D9F-BB485F47FCF0}
+	EndGlobalSection
+EndGlobal

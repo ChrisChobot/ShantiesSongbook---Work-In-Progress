@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ShantiesSongbook.Data;
+using DataAccess;
 
 namespace ShantiesSongbook
 {
@@ -25,8 +25,8 @@ namespace ShantiesSongbook
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShantiesContext>(cfg =>
-            { cfg.UseSqlServer(); });
+            services.AddDbContext<ShantiesContext>(options =>
+            { options.UseSqlServer(); });
 
             services.AddRazorPages();
         }

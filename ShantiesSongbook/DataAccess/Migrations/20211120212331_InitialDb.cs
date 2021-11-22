@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ShantiesSongbook.Migrations
+namespace DataAccess.Migrations
 {
     public partial class InitialDb : Migration
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ShantiesSongbook.Data.Entities;
+using DataAccess.Entities;
 
-namespace ShantiesSongbook.Data
+namespace DataAccess
 {
     public class ShantiesContext : DbContext
     {

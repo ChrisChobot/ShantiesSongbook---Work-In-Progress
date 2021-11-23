@@ -1,15 +1,15 @@
-﻿namespace DataAccess.Entities
+using System.Text;
+
+namespace DataConverter
 {
-    public class Shanty
+    public class RawShanty
     {
-        public int Id { get; set; }
         public string Title { get; set; }
-        public string Text { get; set; }
+        public StringBuilder Text { get; } = new StringBuilder();
         public bool HaveChords { get; set; }
-        public string Chords { get; set; }
+        public StringBuilder Chords { get; } = new StringBuilder();
         public string Performer { get; set; }
         public string TextAuthor { get; set; }
         public string MusicAuthor { get; set; }
-        
     }
 }

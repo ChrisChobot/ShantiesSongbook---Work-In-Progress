@@ -13,7 +13,7 @@ namespace DataConverter
 
         static void ProcessFile()
         {
-            using (StreamReader reader = new StreamReader(@"~\..\..\..\..\..\..\testDict.txt")) 
+            using (StreamReader reader = new StreamReader(@"~\..\..\..\..\..\..\spiewnik.szanty.art.pl.utf8.txt")) 
             {
                 using (StreamWriter writer = new StreamWriter(@"~\..\..\..\..\..\..\output.json"))
                 {

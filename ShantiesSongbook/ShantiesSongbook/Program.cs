@@ -11,7 +11,7 @@ namespace ShantiesSongbook
         {
             var host = CreateHostBuilder(args).Build();
 
-            if (args.Length > 0 && args[0].ToLower() == "-seed")
+            if (args.Length > 0 && args[0].ToLower() == "--seed")
             {
                 RunSeeding(host);
                 return;

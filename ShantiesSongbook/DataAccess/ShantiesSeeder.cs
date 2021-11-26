@@ -1,4 +1,7 @@
 ﻿using DataAccess.Entities;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace DataAccess
@@ -18,11 +21,37 @@ namespace DataAccess
 
             if (!_shantiesContext.Shanties.Any())
             {
-                /*   var file = Path.Combine(_hosting.ContentRootPath, "Data/DbSeed.json");
-                   var json = File.ReadAllText(file);
-                   var shanties = JsonSerializer.Deserialize<IEnumerable<Shanty>>(json);
-                   _shantiesContext.Shanties.AddRange(shanties);*/
-                _shantiesContext.Add(new Shanty() { Chords = " AA GG Cd", HaveChords = true, Text = "la la la la" });
+               
+                var filePath = @"~\..\..\..\output.json";
+
+                if (File.Exists(filePath))
+                {
+                  /*  using (var streamReader = new StreamReader(filePath))
+                    {
+                        while(streamReader.ReadLine() != EndOfStreamException)
+                        {
+                            if (!string.IsNullOrEmpty(line))
+                            {
+                                result.Add(JsonConvert.DeserializeObject<ValueDTO>(line));
+                            }
+                        }
+                    }
+*/
+                    using (JsonTextReader reader = new JsonTextReader(new StreamReader(filePath)))
+                    {
+                        reader.SupportMultipleContent = true;
+                        JsonSerializer serializer = new JsonSerializer();
+                        while (reader.Read())
+                        {
+                            var shanty = serializer.Deserialize<Shanty>(reader);
+                            _shantiesContext.Shanties.Add(shanty);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("First generate output.json by DataConverter!");
+                }
               
                 _shantiesContext.SaveChanges();
             }

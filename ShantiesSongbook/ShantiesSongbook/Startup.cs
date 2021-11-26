@@ -24,6 +24,8 @@ namespace ShantiesSongbook
             { options.UseSqlServer(); });
 
             services.AddRazorPages();
+
+            services.AddTransient<ShantiesSeeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShantiesSongbookTests", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{401D4B79-C3B2-443D-8833-7D4A541A2505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataConverter", "DataConverter\DataConverter.csproj", "{D9EAA57F-D93D-4CE4-A0EE-D9691605F955}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataConverter", "DataConverter\DataConverter.csproj", "{D9EAA57F-D93D-4CE4-A0EE-D9691605F955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

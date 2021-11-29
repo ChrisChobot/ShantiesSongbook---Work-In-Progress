@@ -1,0 +1,15 @@
+﻿@page
+@model ShantiesSongbook.Pages.SongBookModel
+@{
+    ViewData["Title"] = "Song book";
+}
+@section Scripts {
+    <script src="~/client/runtime.js"></script>
+    <script src="~/client/polyfills.js"></script>
+    <script src="~/client/main.js" asp-append-version="true"></script>
+}
+@section head {
+    <link href="~/client/styles.css" rel="stylesheet" asp-append-version="true" />
+}
+<songbook-root></songbook-root>
+

@@ -4,7 +4,7 @@ using DataAccess.Entities;
 
 namespace DataAccess
 {
-    public class ShantiesContext : DbContext
+    internal class ShantiesContext : DbContext
     {
         private readonly IConfiguration _configuration;
 

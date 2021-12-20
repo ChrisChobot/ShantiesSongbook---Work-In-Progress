@@ -26,17 +26,6 @@ namespace DataAccess
 
                 if (File.Exists(filePath))
                 {
-                  /*  using (var streamReader = new StreamReader(filePath))
-                    {
-                        while(streamReader.ReadLine() != EndOfStreamException)
-                        {
-                            if (!string.IsNullOrEmpty(line))
-                            {
-                                result.Add(JsonConvert.DeserializeObject<ValueDTO>(line));
-                            }
-                        }
-                    }
-*/
                     using (JsonTextReader reader = new JsonTextReader(new StreamReader(filePath)))
                     {
                         reader.SupportMultipleContent = true;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -6,7 +7,7 @@ namespace ShantiesSongbookSite.Controllers
 {
     public class SongbookController : Controller
     {
-        public SongbookController(IDutchRepository repository, ILogger<SongbookController> logger)
+        public SongbookController(IShantiesRepository repository, ILogger<SongbookController> logger)
         {
 
         }

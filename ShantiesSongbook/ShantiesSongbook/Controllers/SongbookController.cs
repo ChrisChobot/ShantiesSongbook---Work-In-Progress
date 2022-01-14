@@ -1,49 +1,65 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace ShantiesSongbookSite.Controllers
 {
+    [Route("api/")]
     public class SongbookController : Controller
     {
+        private readonly IShantiesRepository _repository;
+        private readonly ILogger<SongbookController> _logger;
+
         public SongbookController(IShantiesRepository repository, ILogger<SongbookController> logger)
         {
-
+            _repository = repository;
+            _logger = logger;
         }
         
-        // GET: SongbookController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: SongbookController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: SongbookController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SongbookController/Create
         [HttpGet]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult<IEnumerable<Shanty>> GetAll()
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return Ok(_repository.GetAll());
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                _logger.LogError($"Failed to get all shanties: {e}");
+                return BadRequest("Fail at getting shanties");
             }
         }
-        
+
+        [HttpGet]
+        public ActionResult<Shanty> Get(uint id)
+        {
+            try
+            {
+                return Ok(_repository.Get(id));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Failed to get shanty: {e}");
+                return BadRequest("Fail at getting shanty");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult<Shanty> Get(string title)
+        {
+            try
+            {
+                return Ok(_repository.Get(title));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Failed to get shanty: {e}");
+                return BadRequest("Fail at getting shanty");
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace DataAccess
     public interface IShantiesRepository
     {
         IEnumerable<Shanty> GetAll();
-        IEnumerable<Shanty> Get(int id);
-        IEnumerable<Shanty> Get(string title);
+        Shanty Get(uint id);
+        Shanty Get(string title);
     }
 }

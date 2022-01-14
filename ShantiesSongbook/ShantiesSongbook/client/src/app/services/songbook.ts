@@ -1,10 +1,20 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class Songbook {
-  public songs = [{
-    title: "random"
-  }, {
-    title: "default"
-  }];
+
+  constructor(private http: HttpClient) {
+
+  }
+
+  public songs = [];
+
+  loadSongs() {
+    return this.http.get<[]>("/api")
+      .pipe(map(data => 
+        this.songs = data        
+      ));
+  }
 }

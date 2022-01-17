@@ -24,8 +24,11 @@ namespace ShantiesSongbook
             { options.UseSqlServer(); });
 
             services.AddRazorPages();
+            services.AddControllers();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            
+            services.AddTransient<IShantiesRepository, ShantiesRepository>();
             services.AddTransient<ShantiesSeeder>();
         }
 
@@ -52,6 +55,7 @@ namespace ShantiesSongbook
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

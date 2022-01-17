@@ -8,8 +8,9 @@ using System.Collections.Generic;
 
 namespace ShantiesSongbookSite.Controllers
 {
-    [Route("api/")]
-    public class SongbookController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SongbookController : ControllerBase
     {
         private readonly IShantiesRepository _repository;
         private readonly ILogger<SongbookController> _logger;
@@ -19,8 +20,9 @@ namespace ShantiesSongbookSite.Controllers
             _repository = repository;
             _logger = logger;
         }
-        
+
         [HttpGet]
+        [Route("getall")]
         public ActionResult<IEnumerable<Shanty>> GetAll()
         {
             try

@@ -7,10 +7,9 @@ import { Songbook } from "../services/songbook";
 })
 
 export default class ShantyView implements OnInit {
-  public songs: any[] = [];
 
-  constructor(private songbook: Songbook) {
-    this.songs = songbook.songs
+
+  constructor(public songbook: Songbook) {
   }
 
   ngOnInit(): void {

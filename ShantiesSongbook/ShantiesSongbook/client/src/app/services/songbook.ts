@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
+import { SongInfo } from "../shared/SongInfo";
 
 @Injectable()
 export class Songbook {
@@ -9,12 +10,12 @@ export class Songbook {
 
   }
 
-  public songs = [];
+  public songsInfo: SongInfo[] = [];
 
   loadSongs() {
-    return this.http.get<[]>("/api")
+    return this.http.get<[]>("/api/Songbook/getall")
       .pipe(map(data => 
-        this.songs = data        
+        this.songsInfo = data        
       ));
   }
 }

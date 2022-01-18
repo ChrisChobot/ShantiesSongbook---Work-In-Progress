@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public interface IShantiesRepository
+    public interface IShantyRepository
     {
         IEnumerable<Shanty> GetAll();
         Shanty Get(uint id);

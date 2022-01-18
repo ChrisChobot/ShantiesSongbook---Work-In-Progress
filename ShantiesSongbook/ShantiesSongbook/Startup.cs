@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
+using ShantiesSongbookSite;
+using AutoMapper;
+using ShantiesSongbookSite.Services;
 
 namespace ShantiesSongbook
 {
@@ -27,8 +30,16 @@ namespace ShantiesSongbook
             services.AddControllers();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            
-            services.AddTransient<IShantiesRepository, ShantiesRepository>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ShantyProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddTransient<IShantyRepository, ShantyRepository>();
+            services.AddTransient<IShantyService, ShantyService>();
             services.AddTransient<ShantiesSeeder>();
         }
 

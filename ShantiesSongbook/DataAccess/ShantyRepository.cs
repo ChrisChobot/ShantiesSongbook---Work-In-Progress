@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ShantiesRepository : IShantiesRepository
+    public class ShantyRepository : IShantyRepository
     {
         private readonly ShantiesContext _context;
-        private readonly ILogger<ShantiesRepository> _logger;
+        private readonly ILogger<ShantyRepository> _logger;
 
-        public ShantiesRepository(ShantiesContext context, ILogger<ShantiesRepository> logger)
+        public ShantyRepository(ShantiesContext context, ILogger<ShantyRepository> logger)
         {
             _context = context;
             _logger = logger;

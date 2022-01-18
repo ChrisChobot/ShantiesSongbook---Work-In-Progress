@@ -3,6 +3,8 @@ using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ShantiesSongbookSite.Model;
+using ShantiesSongbookSite.Services;
 using System;
 using System.Collections.Generic;
 
@@ -12,22 +14,22 @@ namespace ShantiesSongbookSite.Controllers
     [Route("api/[controller]")]
     public class SongbookController : ControllerBase
     {
-        private readonly IShantiesRepository _repository;
         private readonly ILogger<SongbookController> _logger;
+        private readonly IShantyService _shantyService;
 
-        public SongbookController(IShantiesRepository repository, ILogger<SongbookController> logger)
+        public SongbookController(ILogger<SongbookController> logger, IShantyService shantyService)
         {
-            _repository = repository;
             _logger = logger;
+            _shantyService = shantyService;
         }
 
         [HttpGet]
         [Route("getall")]
-        public ActionResult<IEnumerable<Shanty>> GetAll()
+        public ActionResult<IEnumerable<BasicShantyInfo>> GetAll()
         {
             try
             {
-                return Ok(_repository.GetAll());
+                return Ok(_shantyService.GetAll());
             }
             catch (Exception e)
             {
@@ -41,7 +43,7 @@ namespace ShantiesSongbookSite.Controllers
         {
             try
             {
-                return Ok(_repository.Get(id));
+                return Ok(_shantyService.Get(id));
             }
             catch (Exception e)
             {
@@ -55,7 +57,7 @@ namespace ShantiesSongbookSite.Controllers
         {
             try
             {
-                return Ok(_repository.Get(title));
+                return Ok(_shantyService.Get(title));
             }
             catch (Exception e)
             {

@@ -1,0 +1,12 @@
+li a {
+  display: block;
+}
+
+a:hover {
+  color: forestgreen;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: blue;
+}

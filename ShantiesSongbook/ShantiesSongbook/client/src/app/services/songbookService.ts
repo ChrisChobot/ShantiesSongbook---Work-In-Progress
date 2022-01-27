@@ -1,10 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { SongInfo } from "../shared/SongInfo";
 
 @Injectable()
-export class Songbook {
+export class SongbookService {
 
   constructor(private http: HttpClient) {
 
@@ -12,10 +13,15 @@ export class Songbook {
 
   public songsInfo: SongInfo[] = [];
 
-  loadSongs() {
+  loadSongs(): Observable<void> {
     return this.http.get<[]>("/api/Songbook/getall")
-      .pipe(map(data => 
-        this.songsInfo = data        
-      ));
+      .pipe(map(data => { 
+        this.songsInfo = data;
+        return;
+      }));
+  }
+
+  getSong(id : number) {
+    return this.http.get("/api/Songbook/getById/"+id);
   }
 }

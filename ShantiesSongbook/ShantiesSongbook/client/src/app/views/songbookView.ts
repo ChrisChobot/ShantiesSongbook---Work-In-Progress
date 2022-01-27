@@ -2,17 +2,18 @@ import { Component, OnInit } from "@angular/core";
 import { SongbookService } from "../services/songbookService";
 
 @Component({
-  selector: 'shanty',
-  templateUrl: 'shantyView.html'
+  selector: 'songbook',
+  templateUrl: 'songbookView.html',
+  styleUrls: ["songbookView.css"]
 })
 
-export default class ShantyView implements OnInit {
+export default class SongbookView implements OnInit {
 
 
   constructor(public songbookService: SongbookService) {
   }
 
   ngOnInit(): void {
-   // this.songbook.loadSongs().subscribe();
+    this.songbookService.loadSongs().subscribe();
   }
 }

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@angular/animations": "^13.2.0",
+    "@angular/platform-browser": "^13.2.0",
+    "ngx-spinner": "^13.0.0"
+  }
+}

@@ -7,6 +7,8 @@ using ShantiesSongbookSite.Model;
 using ShantiesSongbookSite.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ShantiesSongbookSite.Controllers
 {
@@ -29,6 +31,7 @@ namespace ShantiesSongbookSite.Controllers
         {
             try
             {
+                Thread.Sleep(4000);
                 return Ok(_shantyService.GetAll());
             }
             catch (Exception e)
@@ -37,9 +40,10 @@ namespace ShantiesSongbookSite.Controllers
                 return BadRequest("Fail at getting shanties");
             }
         }
-
+        
         [HttpGet]
-        public ActionResult<Shanty> Get(uint id)
+        [Route("getById/{id}")]
+        public ActionResult<Shanty> GetById(uint id)
         {
             try
             {
@@ -53,7 +57,8 @@ namespace ShantiesSongbookSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Shanty> Get(string title)
+        [Route("getByTitle/{title}")]
+        public ActionResult<Shanty> GetByTitle(string title)
         {
             try
             {

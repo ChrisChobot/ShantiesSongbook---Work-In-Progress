@@ -4,6 +4,7 @@ import { Component } from "@angular/core";
   selector: "songbook-page",
   templateUrl: "SongBookPage.html"
 })
+
 export class SongBookPage {
 
 }

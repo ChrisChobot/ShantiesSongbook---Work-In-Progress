@@ -16,6 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
 import ShantyView from './views/shantyView';
 import SongbookView from './views/songbookView';
 import { SongBookPage } from './pages/songBookPage';
+import { SongbookService } from './services/songbookService';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerService } from './services/spinnerService';
+import { InterceptorService } from './services/interceptorService';
 
 @NgModule({
   imports: [
@@ -27,6 +31,7 @@ import { SongBookPage } from './pages/songBookPage';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    HttpClientModule,
     router
   ],
   declarations: [
@@ -37,6 +42,11 @@ import { SongBookPage } from './pages/songBookPage';
     ShantyView,
     SongbookView,
     SongBookPage
+   ],
+  providers: [
+      SongbookService,
+      SpinnerService,
+      { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

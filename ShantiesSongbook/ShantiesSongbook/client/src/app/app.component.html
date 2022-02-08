@@ -1,5 +1,5 @@
-
-
 <router-outlet>
-    <progress-indicator></progress-indicator>
+   <div *ngIf="visibility">
+        <mat-spinner color="accent"></mat-spinner>
+   </div>   
 </router-outlet>

@@ -1,7 +1,5 @@
 <div class="row">
-  <ul>
-    <mat-spinner></mat-spinner>
-
+  <ul>    
     <li *ngFor="let s of songbookService.songsInfo">
       <a href="/{{s.id}}">
         <div *ngIf="!s.performer; then onlyTitle else titleWithPerformer"> </div>

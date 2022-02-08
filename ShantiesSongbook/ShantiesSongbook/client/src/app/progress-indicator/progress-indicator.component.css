@@ -1,0 +1,11 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+.spacer {
+  height: 30px;
+}
+.progress-indicator {
+  width: 300px;
+  margin: 30px;
+}

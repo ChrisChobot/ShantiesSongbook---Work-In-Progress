@@ -1,0 +1,24 @@
+<h1 class="center">Progress Indicators</h1>
+
+<div class="progress-indicator">
+  <p><b>Indeterminate & Static</b> UI Feedback</p>
+  <button mat-raised-button color="primary">Submit <mat-icon><mat-spinner color="accent" diameter="20">
+    </mat-spinner></mat-icon> </button>
+</div>
+
+<div> Indeterminate Task Completion Time & No progress of ongoing task i.e. Static
+  <mat-spinner [diameter]="spinnerDiameter"></mat-spinner>
+
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+
+
+
+<div>Determinate Task Completion Time & changing progress of ongoing task i.e. Dynamic
+  <mat-spinner [diameter]="spinnerDiameter" mode="determinate" [value]="progressValue$ | async"></mat-spinner>
+  <mat-progress-bar class="pb-margin" mode="determinate" [value]="progressValue$ | async"></mat-progress-bar>
+</div>
+
+<div class="spacer"></div>
+<button mat-raised-button color="accent" (click)="showDialog()">Progress Indicatior Dialog</button>

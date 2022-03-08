@@ -11,6 +11,8 @@ namespace DataConverter
         private bool _gotAuthors;
         private bool _noAuthors;
         private bool _gettingAuthors;
+        private bool _gotChorus;
+        private bool _gettingChorus;
         private RawShanty _shanty;
 
         public ShantyBuilder(StreamWriter streamWriter)
@@ -59,8 +61,11 @@ namespace DataConverter
             {
                 Title = _shanty.Title,
                 Text = _shanty.Text.ToString(),
+                Chorus = _shanty.Chorus.ToString(),
                 HaveChords = _shanty.HaveChords,
+                HaveChorusChords = _shanty.HaveChorusChords,
                 Chords = _shanty.Chords.ToString(),
+                ChorusChords = _shanty.ChorusChords.ToString(),
                 Performer = _shanty.Performer,
                 TextAuthor = _shanty.TextAuthor,
                 MusicAuthor = _shanty.MusicAuthor
@@ -77,6 +82,8 @@ namespace DataConverter
              _gotAuthors = false;
              _noAuthors = false;
              _gettingAuthors = false;
+             _gettingChorus = false;
+             _gotChorus = false;
         }
 
         private void HandleNullAndWhitespaces()
@@ -127,20 +134,53 @@ namespace DataConverter
 
         private void SetTextAndChords(string line)
         {
-            if (TrySetChords(line, out var text))
+            if (!_gotChorus)
             {
-                _shanty.Text.Append($"{text}\n");
+                if (IsItChorus(line))
+                {
+                    _gettingChorus = true;
+                }
+            }
+
+            if (_gettingChorus)
+            {
+                if (TrySetChorusChord(line, out var text))
+                {
+                    _shanty.Chorus.Append($"{text}\n");
+                }
+                else if (!string.IsNullOrWhiteSpace(text))
+                {
+                    _shanty.Chorus.Append($"{line.Trim()}\n");
+                }
+                else
+                {
+                    _gettingChorus = false;
+                    _gotChorus = true;
+                }
             }
             else
             {
-                _shanty.Text.Append($"{line.Trim()}\n");
+                if (TrySetTextChord(line, out var text))
+                {
+                    _shanty.Text.Append($"{text}\n");
+                }
+                else
+                {
+                    _shanty.Text.Append($"{line.Trim()}\n");
+                }
             }
         }
 
-        private bool TrySetChords(string line, out string text)
+        private bool IsItChorus(string line)
+        {
+            return line.ToLower().StartsWith("ref.:");
+        }
+
+
+        private bool TrySetTextChord(string line, out string text)
         {
             var splittedLine = line.Split('|');
-            
+
             if (splittedLine.Length == 1)
             {
                 text = null;
@@ -148,8 +188,46 @@ namespace DataConverter
             }
 
             text = splittedLine[0].Trim();
-            _shanty.Chords.Append($"{splittedLine[1].Trim()}\n");
-            _shanty.HaveChords = true;
+            var chord = splittedLine[splittedLine.Length - 1].Trim();
+
+            if (IsRealChord(chord))
+            {
+                _shanty.Chords.Append($"{chord}\n");
+                _shanty.HaveChords = true;
+            }
+
+            return true;
+        }        
+        
+        private bool TrySetChorusChord(string line, out string text)
+        {
+            var splittedLine = line.Split('|');
+
+            if (splittedLine.Length == 1)
+            {
+                text = null;
+                return false;
+            }
+
+            text = splittedLine[0].Trim();
+            var chord = splittedLine[splittedLine.Length - 1].Trim();
+
+            if (IsRealChord(chord))
+            {
+                _shanty.ChorusChords.Append($"{chord}\n");
+                _shanty.HaveChorusChords = true;
+            }
+
+            return true;
+        }
+
+        private bool IsRealChord(string chord)
+        {
+            if (chord.ToLower().Contains("bis") || chord.ToLower().Contains("refren"))
+            {
+                return false;
+            }
+
             return true;
         }
     }

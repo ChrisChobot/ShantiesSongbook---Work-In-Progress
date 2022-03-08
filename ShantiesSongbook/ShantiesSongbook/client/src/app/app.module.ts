@@ -13,13 +13,15 @@ import { ProgressIndicatorComponent } from './progress-indicator/progress-indica
 import { IndeterminateDialogIndicatorComponent } from './progress-indicator/indeterminate-dialog-indicator/indeterminate-dialog-indicator.component';
 import { DeterminateDialogIndicatorComponent } from './progress-indicator/determinate-dialog-indicator/determinate-dialog-indicator.component';
 import { MatIconModule } from '@angular/material/icon';
-import ShantyView from './views/shantyView';
+import SongView from './views/songView';
 import SongbookView from './views/songbookView';
 import { SongBookPage } from './pages/songBookPage';
 import { SongbookService } from './services/songbookService';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerService } from './services/spinnerService';
 import { InterceptorService } from './services/interceptorService';
+import { SongPage } from './pages/songPage';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -39,14 +41,16 @@ import { InterceptorService } from './services/interceptorService';
     ProgressIndicatorComponent,
     IndeterminateDialogIndicatorComponent,
     DeterminateDialogIndicatorComponent,
-    ShantyView,
+    SongView,
     SongbookView,
-    SongBookPage
+      SongBookPage,
+      SongPage
    ],
   providers: [
       SongbookService,
       SpinnerService,
-      { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+      { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+      { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })

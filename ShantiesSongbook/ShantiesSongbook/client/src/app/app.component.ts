@@ -18,12 +18,10 @@ export class AppComponent {
 
         this.spinnerService.visibility.subscribe(state => {
             this.visibility = state;
-            console.log('visibility', state);
         });
 
         this.spinnerService.notVisibility.subscribe(state => {
             this.visibility = state;
-            console.log('notVisibility', state);
         });
 
     }

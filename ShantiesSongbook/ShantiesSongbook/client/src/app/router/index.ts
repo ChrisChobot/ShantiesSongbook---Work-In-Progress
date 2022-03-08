@@ -1,13 +1,16 @@
 import { RouterModule } from "@angular/router";
 import { SongBookPage } from "../pages/songBookPage";
+import { SongPage } from "../pages/songPage";
 
 const routes = [
   { path: "", component: SongBookPage },
-  //{ path: "**", redirectTo: "/" }
+    { path: ":songNumber", component: SongPage },
+  //  { path: "**", component: SongBookPage}
 ];
 
 const router = RouterModule.forRoot(routes, {
-  useHash: false
+    scrollPositionRestoration: "top",
+  useHash: true
 });
 
 export default router;

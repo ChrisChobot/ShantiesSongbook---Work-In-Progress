@@ -1,7 +1,7 @@
 <div class="row">
   <ul>    
     <li *ngFor="let s of songbookService.songsInfo">
-      <a href="/{{s.id}}">
+      <a [routerLink]="['/', s.id]">
         <div *ngIf="!s.performer; then onlyTitle else titleWithPerformer"> </div>
         <ng-template #onlyTitle>{{s.title}} </ng-template>
         <ng-template #titleWithPerformer>{{s.title}} - {{s.performer}}</ng-template>

@@ -93,10 +93,16 @@ namespace DataConverter
                 _gettingAuthors = false;
                 _gotAuthors = true;
             }
+            else if (_gettingChorus)
+            {
+                _gettingChorus = false;
+                _gotChorus = true;
+            }
             else if (_gotTitle &&( _noAuthors||_gotAuthors))
             {
                 _shanty.Text.Append("\n");
             }
+          
         }
         
         private bool IsNewShanty(string line)
@@ -152,11 +158,6 @@ namespace DataConverter
                 {
                     _shanty.Chorus.Append($"{line.Trim()}\n");
                 }
-                else
-                {
-                    _gettingChorus = false;
-                    _gotChorus = true;
-                }
             }
             else
             {
@@ -183,7 +184,7 @@ namespace DataConverter
 
             if (splittedLine.Length == 1)
             {
-                text = null;
+                text = line;
                 return false;
             }
 
@@ -205,7 +206,7 @@ namespace DataConverter
 
             if (splittedLine.Length == 1)
             {
-                text = null;
+                text = line;
                 return false;
             }
 

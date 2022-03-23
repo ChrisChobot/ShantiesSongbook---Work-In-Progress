@@ -1,23 +1,28 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router,ActivatedRoute, ParamMap, Params  } from "@angular/router";
 import { SongbookService } from "../services/songbookService";
 import { Song } from "../shared/Song";
 
 @Component({
-  selector: 'song',
-  templateUrl: 'songView.html'
+    selector: 'song',
+    templateUrl: 'songView.html',
+    styleUrls: ['./songView.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export default class SongView implements OnInit {
 
     public song: Song;
+    public inited: boolean;
     private songNumber: string;
 
     constructor(public songbookService: SongbookService,
         private route: ActivatedRoute)
-    { }
+    {
+    }
 
     ngOnInit() {
+        console.log("this.inited: " + this.inited);
        
         this.route.paramMap.subscribe(params => {
             this.songNumber = params.get('songNumber');
@@ -34,7 +39,10 @@ export default class SongView implements OnInit {
                     textAuthor: data.textAuthor,
                     title: data.title,
                     id: data.id
-            });
+                }
+            );
+            this.inited = true;
+            console.log("this.inited: " + this.inited);
         });
         
     }
@@ -49,27 +57,23 @@ export default class SongView implements OnInit {
             let chorusLenght = chorusArray.length;
             let chordsArray = this.song.chorusChords.split("\n");
             let chordsLenght = chordsArray.length;
-
-          /*  for (var i = 0; i < chordsLenght; i++) {
-                chordsArray[i] = "<i>" + chordsArray[i] + "</i>";
-            }*/
            
             if (chorusLenght == chordsLenght) {
                 for (var i = 0; i < chorusLenght; i++) {
-                    outputArray.push(chordsArray[i]);
+                    outputArray.push(this.GetChordsWithHtml(chordsArray[i]));
                     outputArray.push(chorusArray[i]);
                 }
             }
             else if (chorusLenght > chordsLenght) {
                 for (var i = 0, j = 0; i < chorusLenght; i++, j++, j %= chordsLenght) {
-                    outputArray.push(chordsArray[j]);
+                    outputArray.push(this.GetChordsWithHtml(chordsArray[j]));
                     outputArray.push(chorusArray[i]);
                 }
             }
             else {
 
                 for (var i = 0; i < chordsLenght; i++) {
-                    outputArray.push(chordsArray[i]);
+                    outputArray.push(this.GetChordsWithHtml(chordsArray[i]));
                     if (i <= chorusLenght) {
                         outputArray.push(chorusArray[i]);
                     }
@@ -95,25 +99,18 @@ export default class SongView implements OnInit {
 
             if (textLenght == chordsLenght) {
                 for (var i = 0; i < textLenght; i++) {
-                    outputArray.push(chordsArray[i]);
+                    outputArray.push(this.GetChordsWithHtml(chordsArray[i]));
                     outputArray.push(textArray[i]);
                 }
             }
             else if (textLenght > chordsLenght) {
-                for (var i = 0, j = 0; i < verseArray.length; i++) {
-
-                    let tempTextArray = verseArray[i].split("\n");
-                    for (var k = 0; k < tempTextArray.length; k++, j++, j %= chordsLenght) {
-                        outputArray.push(chordsArray[j]);
-                        outputArray.push(tempTextArray[k]);
-                    }
-                    outputArray.push("\n");
-                }
+                outputArray.push(
+                    this.HandleTextVerse(verseArray, chordsArray, chordsLenght));
             }
             else {
                 
                 for (var i = 0; i < chordsLenght; i++) {
-                    outputArray.push(chordsArray[i]);
+                    outputArray.push(this.GetChordsWithHtml(chordsArray[i]));
                     if (i <= textLenght) {
                         outputArray.push(textArray[i]);
                     }
@@ -124,5 +121,26 @@ export default class SongView implements OnInit {
         }
 
         return this.song.text;               
+    }
+
+    private GetChordsWithHtml(chords: string): string {
+        return "<div class=\"chords\">" + chords + "</div>";
+    }
+
+    private HandleTextVerse(verseArray: string[], chordsArray: string[], chordsLenght: number): string{
+        let outputArray = [];
+
+        for (var i = 0, j = 0; i < verseArray.length; i++) {
+
+            let tempTextArray = verseArray[i].split("\n");
+            for (var k = 0; k < tempTextArray.length; k++, j++, j %= chordsLenght) {
+                outputArray.push(this.GetChordsWithHtml(chordsArray[j]));
+                outputArray.push(tempTextArray[k]);
+            }
+            outputArray.push("</br>");
+            outputArray.push("</br>");
+        }
+
+        return outputArray.join("\n"); 
     }
 }

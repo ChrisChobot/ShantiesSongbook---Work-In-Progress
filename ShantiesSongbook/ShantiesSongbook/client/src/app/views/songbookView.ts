@@ -14,6 +14,6 @@ export default class SongbookView implements OnInit {
   }
 
   ngOnInit(): void {
-    this.songbookService.loadSongs().subscribe();
+    this.songbookService.loadSongs();
   }
 }

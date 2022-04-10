@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { Router,ActivatedRoute, ParamMap, Params  } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { SongbookService } from "../services/songbookService";
 import { Song } from "../shared/Song";
+import { SongNavigation } from "../shared/SongNavigation";
 
 @Component({
     selector: 'song',
     templateUrl: 'songView.html',
-    styleUrls: ['./songView.css'],
+    styleUrls: ['../../styles.css', './songView.css'],
     encapsulation: ViewEncapsulation.None
 })
 
 export default class SongView implements OnInit {
 
+    public songNavigation: SongNavigation;
     public song: Song;
     public inited: boolean;
     private songNumber: string;
@@ -21,9 +23,7 @@ export default class SongView implements OnInit {
     {
     }
 
-    ngOnInit() {
-        console.log("this.inited: " + this.inited);
-       
+    ngOnInit() {       
         this.route.paramMap.subscribe(params => {
             this.songNumber = params.get('songNumber');
             this.songbookService.getSong(Number(this.songNumber))
@@ -40,9 +40,9 @@ export default class SongView implements OnInit {
                     title: data.title,
                     id: data.id
                 }
-            );
+                );
+            this.songbookService.getSongNavigation(Number(this.songNumber)).then(x => this.songNavigation = x);
             this.inited = true;
-            console.log("this.inited: " + this.inited);
         });
         
     }

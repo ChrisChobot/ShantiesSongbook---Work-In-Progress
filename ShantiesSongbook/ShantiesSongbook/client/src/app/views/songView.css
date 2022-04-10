@@ -3,3 +3,21 @@
     color: #52527a;
     letter-spacing: 3px;
 }
+.mat-icon {
+    color: #59D997;
+    transform: scale(3);
+}
+.mat-icon-search {
+    transform: scale(2);
+}
+button:focus,
+button:active:focus,
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+}
+.title {
+    display: inline-block;
+    margin-left: 40px;
+    margin-right: 40px;
+}

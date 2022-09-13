@@ -1,22 +1,21 @@
-<div>
-
-    <a mat-icon-button aria-label="Previous" href="#{{songNavigation.previousSong}}" target="_blank">
+<div *ngIf="this.inited; else loadingBlock">
+    <a mat-icon-button aria-label="Previous" href="#{{songNavigation.previousSong}}" target="_self" ng-cloak>
         <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
 
 
     <div class="title">{{song.title}}</div>
 
-    <a mat-icon-button aria-label="Next" href="#{{songNavigation.nextSong}}" target="_blank">
+    <a mat-icon-button aria-label="Next" href="#{{songNavigation.nextSong}}" target="_self" ng-cloak>
         <mat-icon>keyboard_arrow_right</mat-icon>
     </a>
-    <a mat-icon-button aria-label="Random" href="#{{songNavigation.randomSong}}" target="_blank">
+    <a mat-icon-button aria-label="Random" href="#{{songNavigation.randomSong}}" target="_self" ng-cloak>
         <mat-icon class="mat-icon-search">find_replace</mat-icon>
     </a>
-   
+
 
     <br /><br />
     <div innerHTML="{{ConnectChorusChords()}}"></div><br /><br />
     <div innerHTML="{{ConnectTextChords()}}"></div>
-
 </div>
+<ng-template #loadingBlock>  <mat-spinner color="accent"></mat-spinner></ng-template>

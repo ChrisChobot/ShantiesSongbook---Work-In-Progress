@@ -31,7 +31,6 @@ namespace ShantiesSongbookSite.Controllers
         {
             try
             {
-                Thread.Sleep(4000);
                 return Ok(_shantyService.GetAll());
             }
             catch (Exception e)

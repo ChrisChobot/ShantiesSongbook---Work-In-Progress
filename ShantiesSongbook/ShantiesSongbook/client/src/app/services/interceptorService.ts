@@ -18,6 +18,6 @@ export class InterceptorService implements HttpInterceptor {
             .pipe(
                 delay(0),
                 finalize(() => this.spinner.notVisibility.emit(false))
-            )
+            );   
     }
 }

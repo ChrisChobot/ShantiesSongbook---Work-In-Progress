@@ -46,9 +46,8 @@ export class SongbookService {
         }
         
         return {
-           
-            nextSong: id + 1 >= this.maxid ? this.minid : id + 1,
-            previousSong: id - 1 >= this.maxid ? this.minid : id - 1,
+            nextSong: id + 1 > this.maxid || id + 1 < this.minid ? this.minid : id + 1 ,
+            previousSong: id - 1 < this.minid || id - 1 >= this.maxid ? this.maxid : id - 1,
             randomSong: Math.floor(Math.random() * (this.maxid - this.minid + 1) + this.minid)
         }
     }

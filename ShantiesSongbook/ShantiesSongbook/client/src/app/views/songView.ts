@@ -15,16 +15,18 @@ export default class SongView implements OnInit {
 
     public songNavigation: SongNavigation;
     public song: Song;
-    public inited: boolean;
+    public inited: boolean = false;
     private songNumber: string;
 
     constructor(public songbookService: SongbookService,
         private route: ActivatedRoute)
     {
+        this.song = new Song();
+        this.songNavigation = new SongNavigation();
     }
 
     ngOnInit() {       
-        this.route.paramMap.subscribe(params => {
+        this.route.paramMap.subscribe(async params => {
             this.songNumber = params.get('songNumber');
             this.songbookService.getSong(Number(this.songNumber))
                 .subscribe((data: Song) => this.song = {
@@ -41,10 +43,14 @@ export default class SongView implements OnInit {
                     id: data.id
                 }
                 );
-            this.songbookService.getSongNavigation(Number(this.songNumber)).then(x => this.songNavigation = x);
+            await this.songbookService.getSongNavigation(Number(this.songNumber)).then(x => this.songNavigation = x);
             this.inited = true;
-        });
-        
+            
+        });        
+    }
+
+    RandomSong(): void {
+        window.open(this.songNavigation.randomSong.toString(), '_self');
     }
 
     ConnectChorusChords(): string {
